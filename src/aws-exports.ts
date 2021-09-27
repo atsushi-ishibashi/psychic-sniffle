@@ -9,6 +9,7 @@ const awsconfig = {
         AWSPinpoint: {
             appId: process.env.VUE_APP_PINPOINT_APP_ID,
             region: 'us-east-1',
+            mandatorySignIn: false,
         },
     },
 }
