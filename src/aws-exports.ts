@@ -7,7 +7,7 @@ const awsconfig = {
     },
     Analytics: {
         AWSPinpoint: {
-            appId: 'd2ab3f817dbb42148f25ad137cef142b',
+            appId: process.env.VUE_APP_PINPOINT_APP_ID,
             region: 'us-east-1',
         },
     },
