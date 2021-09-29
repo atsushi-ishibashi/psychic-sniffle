@@ -7,11 +7,11 @@ const awsconfig = {
         identityPoolId: process.env.VUE_APP_IDENTITY_POOL_ID,
     },
     Analytics: {
-        AWSPinpoint: {
-            appId: process.env.VUE_APP_PINPOINT_APP_ID,
-            region: 'ap-northeast-1',
-            mandatorySignIn: false,
-        },
+        // AWSPinpoint: {
+        //     appId: process.env.VUE_APP_PINPOINT_APP_ID,
+        //     region: 'ap-northeast-1',
+        //     mandatorySignIn: false,
+        // },
         AWSKinesisFirehose: {
             region: 'ap-northeast-1',
         }

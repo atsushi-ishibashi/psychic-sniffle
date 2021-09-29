@@ -15,6 +15,10 @@
 import Vue from 'vue';
 // import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import { Analytics, Auth } from 'aws-amplify'
+import {
+	ClientDevice,
+  Credentials,
+} from '@aws-amplify/core';
 
 export default Vue.extend({
   name: 'Home',
@@ -57,13 +61,28 @@ export default Vue.extend({
       },
       async kinesisButton() {
         console.log('kinesisButton');
-        const authUser = await Auth.currentAuthenticatedUser()
+        // const authUser = await Auth.currentAuthenticatedUser()
+        // const sess = await Auth.currentCredentials()
+        // console.log("currentCredentials", sess);
+        // const userSess = await Auth.currentUserCredentials()
+        // console.log("currentUserCredentials", userSess);
+        // const csess = await Auth.currentSession()
+        // console.log("currentSession", csess);
+        const cuserInfo = await Auth.currentUserInfo()
+        console.log("currentUserInfo", cuserInfo);
+        
+        const cinfo = ClientDevice.clientInfo()
+        const userAgent = {userAgent: navigator.userAgent}
+        const deviceInfo = { ...cinfo, ...userAgent };
+        
         const data = {
           eventName: 'kinesisButton',
           attributes: { gender: 'MAN', age: 30, location: 'Tokyo', tags: ['tagA', 'tagB'],
-            user: {username: authUser.username, sub: authUser.attributes.sub},
+            user: {username: cuserInfo.username, sub: cuserInfo.attributes.sub, indentityId: cuserInfo.id},
+            devide: deviceInfo,
           },
         }
+        
         Analytics.record({
           data: data,
           streamName: process.env.VUE_APP_STREAM_NAME,
